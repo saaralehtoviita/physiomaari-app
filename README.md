@@ -17,3 +17,7 @@ This application is my practice project on my mobile programming course.
 
 1. System alerts coach when client comments on a session or marks it complete
 2. System alerts client when coach updates training program or answers a comment
+
+## Database plan
+
+![Plan for database structure](pictures/database_plan_v1.png)
