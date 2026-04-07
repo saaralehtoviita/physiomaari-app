@@ -1,16 +1,10 @@
 import { View } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 
-export default function UserHomeScreen({ navigation }: any) {
+export default function UserHomeScreen() {
   return (
     <View>
-      <Button>Testi</Button>
-      <Button onPress={() => navigation.navigate("Completed exercises")}>
-        Completed exercises
-      </Button>
-      <Button onPress={() => navigation.navigate("Upcoming exercises")}>
-        Upcoming exercises
-      </Button>
+      <Text>User's individual calendar will be shown here</Text>
     </View>
   );
 }
