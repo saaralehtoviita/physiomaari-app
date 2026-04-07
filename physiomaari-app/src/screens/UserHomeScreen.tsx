@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 
-function HomeScreen({ navigation }: any) {
+export default function UserHomeScreen({ navigation }: any) {
   return (
     <View>
       <Button>Testi</Button>
@@ -14,5 +14,3 @@ function HomeScreen({ navigation }: any) {
     </View>
   );
 }
-
-export default HomeScreen;
