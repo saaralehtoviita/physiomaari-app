@@ -1,5 +1,21 @@
-import { Text } from "react-native";
+import { FlatList, Text } from "react-native";
+import { demoTrainingSessions } from "../../demodata";
+import { Surface } from "react-native-paper";
+import { styles } from "../ui/styles";
+import { TrainingSession } from "../types/Exercise";
 
-export default function ExercisesDone() {
-  return <Text>List of completed exercises</Text>;
+const sessionsUpcoming: TrainingSession[] = demoTrainingSessions.filter(
+  (s) => s.status === "completed",
+);
+
+export default function ExercisesUpcoming() {
+  return (
+    <Surface>
+      <FlatList
+        style={styles.userList}
+        data={sessionsUpcoming}
+        renderItem={({ item }) => <Text>{item.title}</Text>}
+      ></FlatList>
+    </Surface>
+  );
 }
