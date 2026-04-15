@@ -10,7 +10,7 @@ import NewSession from "../components/NewSession";
 export default function AddSessionScreen() {
   return (
     <View>
-      {/* <NewSession /> */}
+      <NewSession />
       <NewExercise />
       <Button style={styles.basicButton}>Another exercise</Button>
     </View>

@@ -9,7 +9,7 @@ import UserContext from "./hooks/UserContext";
 
 export default function App() {
   //demodatasta tuodaan rooli, jonka mukaan navigointi määräytyy (0 = user, 1 = coach, 2 = user)
-  const activeUser = demoUsers[0];
+  const activeUser = demoUsers[1];
 
   return (
     <PaperProvider>

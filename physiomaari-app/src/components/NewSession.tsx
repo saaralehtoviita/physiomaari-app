@@ -4,6 +4,7 @@ import { Surface, Text, TextInput, Button } from "react-native-paper";
 import { View } from "react-native";
 import { styles } from "../ui/styles";
 import { colors } from "../ui/colors";
+import { testAddSession } from "../firebase/firestoreTest";
 
 export default function NewSession() {
   const [sessionTitle, setSessionTitle] = useState("");
@@ -15,10 +16,11 @@ export default function NewSession() {
     console.log("SessionTitle: " + title);
     console.log("SessionDescription: " + description);
     const newSession: TrainingSession = {
-      sessionId: "123",
+      sessionId: 123,
       title: sessionTitle,
       description: sessionDescription,
       status: "upcoming",
+      datePlanned: "2026-05-06",
       exercises: [],
     };
     console.log(newSession);
@@ -67,6 +69,18 @@ export default function NewSession() {
           onPress={() => saveSession(sessionTitle, sessionDescription)}
         >
           Save Session
+        </Button>
+
+        <Button
+          mode="contained"
+          style={styles.basicButton}
+          buttonColor={colors.primary}
+          rippleColor={colors.gray}
+          contentStyle={{ height: 50 }}
+          labelStyle={{ fontSize: 15 }}
+          onPress={() => testAddSession()}
+        >
+          Save Test
         </Button>
       </View>
     </Surface>
