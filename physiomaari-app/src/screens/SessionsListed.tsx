@@ -1,11 +1,11 @@
 import { FlatList, Text } from "react-native";
+import { getSessions } from "../firebase/getAllSessions";
 import { Surface } from "react-native-paper";
 import { styles } from "../ui/styles";
 import { TrainingSession } from "../types/Exercise";
-import { getSessions } from "../firebase/getAllSessions";
 import { useEffect, useState } from "react";
 
-export default function ExercisesUpcoming() {
+export default function SessionsListed() {
   const [sessions, setSessions] = useState<TrainingSession[]>([]);
 
   useEffect(() => {
@@ -16,16 +16,14 @@ export default function ExercisesUpcoming() {
     load();
   }, []);
 
-  const sessionsUpcoming: TrainingSession[] = sessions.filter(
-    (s) => s.status === "upcoming",
-  );
   return (
     <Surface>
       <FlatList
         style={styles.userList}
-        data={sessionsUpcoming}
+        data={sessions}
+        keyExtractor={(item) => item.sessionId}
         renderItem={({ item }) => <Text>{item.title}</Text>}
-      ></FlatList>
+      />
     </Surface>
   );
 }

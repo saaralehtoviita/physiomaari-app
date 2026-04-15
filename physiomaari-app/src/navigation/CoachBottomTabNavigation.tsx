@@ -14,6 +14,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { colors } from "../ui/colors";
 import AddSessionScreen from "../screens/AddSessionScreen";
 import AllUsersListedScreen from "../screens/AllUsersListedScreen";
+import SessionsListed from "../screens/SessionsListed";
 
 const Tab = createBottomTabNavigator();
 
@@ -46,7 +47,7 @@ const UserBottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Add exercise"
+        name="Add session"
         component={AddSessionScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -57,6 +58,15 @@ const UserBottomTabNavigation = () => {
       <Tab.Screen
         name="List of users"
         component={AllUsersListedScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list" size={30} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="List of sessions"
+        component={SessionsListed}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="list" size={30} color={color} />

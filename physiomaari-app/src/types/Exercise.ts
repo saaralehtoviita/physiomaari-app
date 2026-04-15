@@ -2,13 +2,13 @@ export type SessionStatus = "completed" | "upcoming";
 export type ExerciseStatus = "completed" | "upcoming";
 
 export type TrainingSession = {
-  userId?: number; //muutetaan pakolliseksi, kun kanta ja testikäyttäjät käytössä
-  sessionId: number;
+  userId?: string; //muutetaan pakolliseksi, kun kanta ja testikäyttäjät käytössä
+  sessionId: string;
   title: string;
   description: string;
   datePlanned: string;
-  status: SessionStatus;
-  exercises: SessionExercise[];
+  status?: SessionStatus;
+  exercises?: SessionExercise[];
 };
 
 export type SessionExercise = {
