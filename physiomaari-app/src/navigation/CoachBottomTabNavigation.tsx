@@ -12,7 +12,7 @@ import Octicons from "@expo/vector-icons/Octicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 import { colors } from "../ui/colors";
-import AddExerciseScreen from "../screens/AddExerciseScreen";
+import AddSessionScreen from "../screens/AddSessionScreen";
 import AllUsersListedScreen from "../screens/AllUsersListedScreen";
 
 const Tab = createBottomTabNavigator();
@@ -47,7 +47,7 @@ const UserBottomTabNavigation = () => {
       />
       <Tab.Screen
         name="Add exercise"
-        component={AddExerciseScreen}
+        component={AddSessionScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Entypo name="add-to-list" size={30} color={color} />
