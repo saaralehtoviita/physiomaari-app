@@ -1,19 +1,19 @@
 import { Surface, Text } from "react-native-paper";
-import { useUser } from "../hooks/UserContext";
+import { useUsers } from "../hooks/UserContext";
 import { View } from "react-native";
 import { styles } from "../ui/styles";
 
 export default function ProfileScreen() {
-  const { user } = useUser();
+  const { activeUser } = useUsers();
 
   return (
     <Surface style={styles.profileInfo}>
       <Text>
-        Name: {user?.firstName} {user?.lastName}{" "}
+        Name: {activeUser.firstName} {activeUser.lastName}{" "}
       </Text>
-      <Text>Username: {user?.username} </Text>
-      <Text>Email: {user?.email} </Text>
-      <Text>Role: {user?.role} </Text>
+      <Text>Username: {activeUser.username} </Text>
+      <Text>Email: {activeUser.email} </Text>
+      <Text>Role: {activeUser.role} </Text>
     </Surface>
   );
 }

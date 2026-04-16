@@ -1,13 +1,47 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { AppUser } from "../types/User";
+import { getUsers } from "../firebase/getAllUsers";
 
-type UserContextType = {
-  user: AppUser | null;
-  setUser?: (user: AppUser) => void;
+type UsersContextType = {
+  users: AppUser[];
+  activeUser: AppUser;
+  setActiveUser: (user: AppUser) => void;
+  loading: boolean;
 };
 
-const UserContext = createContext<UserContextType>({ user: null });
+const UsersContext = createContext<UsersContextType | undefined>(undefined);
 
-export const useUser = () => useContext(UserContext);
+export function UsersProvider({ children }: any) {
+  const [users, setUsers] = useState<AppUser[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeUser, setActiveUser] = useState<AppUser | null>(null);
 
-export default UserContext;
+  //users listana 0 = coach (Veikko Valmentaja)
+  //1= user (Pentti Penkkaaja)
+  //2= user (Jenni Jumppanen)
+  useEffect(() => {
+    async function load() {
+      const data = await getUsers();
+      setUsers(data);
+      setActiveUser(data[0]);
+      setLoading(false);
+    }
+    load();
+  }, []);
+
+  return (
+    <UsersContext.Provider
+      value={{ users, activeUser, setActiveUser, loading }}
+    >
+      {children}
+    </UsersContext.Provider>
+  );
+}
+
+export function useUsers() {
+  const context = useContext(UsersContext);
+  if (!context) {
+    throw new Error("useUsers must be used inside UsersProvider");
+  }
+  return context;
+}

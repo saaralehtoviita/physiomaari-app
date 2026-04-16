@@ -5,23 +5,32 @@ import { NavigationContainer } from "@react-navigation/native";
 import { UserRole, AppUser } from "./types/User";
 import { demoUsers } from "../demodata";
 import CoachBottomTabNavigation from "./navigation/CoachBottomTabNavigation";
-import UserContext from "./hooks/UserContext";
+import { UsersProvider, useUsers } from "./hooks/UserContext";
+import { SessionsProvider } from "./hooks/SessionsContext";
 
 export default function App() {
-  //demodatasta tuodaan rooli, jonka mukaan navigointi määräytyy (0 = user, 1 = coach, 2 = user)
-  const activeUser = demoUsers[0];
+  function AppContent() {
+    //haetaan aktiviinen käyttäjä UserContextin userUsersin kautta
+    const { activeUser } = useUsers();
+
+    return (
+      <NavigationContainer>
+        {activeUser.role === "coach" ? (
+          <CoachBottomTabNavigation />
+        ) : (
+          <UserBottomTabNavigation />
+        )}
+      </NavigationContainer>
+    );
+  }
 
   return (
     <PaperProvider>
-      <UserContext.Provider value={{ user: activeUser }}>
-        <NavigationContainer>
-          {activeUser.role === "coach" ? (
-            <CoachBottomTabNavigation />
-          ) : (
-            <UserBottomTabNavigation />
-          )}
-        </NavigationContainer>
-      </UserContext.Provider>
+      <UsersProvider>
+        <SessionsProvider>
+          <AppContent />
+        </SessionsProvider>
+      </UsersProvider>
     </PaperProvider>
   );
 }
