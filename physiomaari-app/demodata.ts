@@ -6,7 +6,7 @@ import {
 } from "./src/types/Exercise";
 import { AppUser } from "./src/types/User";
 
-export const demoUsers: AppUser[] = [
+/* export const demoUsers: AppUser[] = [
   {
     appUserId: 1,
     lastName: "Korhonen",
@@ -35,8 +35,8 @@ export const demoUsers: AppUser[] = [
     role: "user",
   },
 ];
-
-export const demoTrainingSessions: TrainingSession[] = [
+ */
+/* export const demoTrainingSessions: TrainingSession[] = [
   {
     userId: 1,
     sessionId: 1,
@@ -113,4 +113,4 @@ export const demoTrainingSessions: TrainingSession[] = [
       },
     ],
   },
-];
+]; */
