@@ -1,11 +1,11 @@
 export type UserRole = "coach" | "user";
 
 export type AppUser = {
-  appUserId: number;
+  appUserId?: string; //tulee automaattisesti firebasesta
   lastName: string;
   firstName: string;
   email: string;
   username: string;
-  passwordHashed: string;
+  passwordHashed?: string;
   role: UserRole;
 };
