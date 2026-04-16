@@ -4,17 +4,10 @@ import { Surface } from "react-native-paper";
 import { styles } from "../ui/styles";
 import { TrainingSession } from "../types/Exercise";
 import { useEffect, useState } from "react";
+import { useSessions } from "../hooks/SessionsContext";
 
 export default function SessionsListed() {
-  const [sessions, setSessions] = useState<TrainingSession[]>([]);
-
-  useEffect(() => {
-    async function load() {
-      const data = await getSessions();
-      setSessions(data);
-    }
-    load();
-  }, []);
+  const { sessions } = useSessions();
 
   return (
     <Surface>

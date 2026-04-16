@@ -15,25 +15,6 @@ export default function NewSession() {
 
   const [exercises, setExercies] = useState([]);
 
-  /*  //tämä funktio hoitaa myöhemmin uuden session tallentamisen kantaan
-  function saveSession(title: string, description: string) {
-    console.log("SessionTitle: " + title);
-    console.log("SessionDescription: " + description);
-    const newSession: TrainingSession = {
-      sessionId: 123,
-      title: sessionTitle,
-      description: sessionDescription,
-      status: "upcoming",
-      datePlanned: "2026-05-06",
-      exercises: [],
-    };
-    console.log(newSession);
-    //tyhjennetään kentät
-    setSessionTitle("");
-    setSessionDescription("");
-  }
- */
-
   function createSessionAndSave(
     title: string,
     description: string,
