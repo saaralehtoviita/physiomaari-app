@@ -12,10 +12,10 @@ export type TrainingSession = {
 };
 
 export type SessionExercise = {
-  exerciseId: number;
+  exerciseId?: number;
   title: string;
   description: string;
-  status: ExerciseStatus;
+  status?: ExerciseStatus;
   videoUrl?: string; //valmentajan lisäämä youtube-linkki, valinnainen
 };
 

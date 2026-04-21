@@ -3,24 +3,20 @@ import { styles } from "../ui/styles";
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { colors } from "../ui/colors";
-import { TrainingSession } from "../types/Exercise";
+import { SessionExercise, TrainingSession } from "../types/Exercise";
 import NewExercise from "../components/NewExcercise";
 import NewSession from "../components/NewSession";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-function renderNewExercise() {
-  return <NewExercise />;
-}
-
 export default function AddSessionScreen() {
+  const [sessionId, setSessionId] = useState("");
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ padding: 10, gap: 10 }}>
-        <NewSession />
-        <NewExercise />
-        <Button onPress={renderNewExercise} style={styles.basicButton}>
-          Another exercise
-        </Button>
+        <NewSession onSessionCreated={setSessionId} />
+        <NewExercise sessionId={sessionId} />
+        <Button style={styles.basicButton}>Another exercise</Button>
       </ScrollView>
     </SafeAreaView>
   );

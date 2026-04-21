@@ -1,14 +1,15 @@
 import { FlatList, Text } from "react-native";
-import { demoTrainingSessions } from "../../demodata";
 import { Surface } from "react-native-paper";
 import { styles } from "../ui/styles";
 import { TrainingSession } from "../types/Exercise";
+import { useSessions } from "../hooks/SessionsContext";
 
-const sessionsUpcoming: TrainingSession[] = demoTrainingSessions.filter(
-  (s) => s.status === "completed",
-);
+export default function ExercisesDone() {
+  const { sessions } = useSessions();
 
-export default function ExercisesUpcoming() {
+  const sessionsUpcoming: TrainingSession[] = sessions.filter(
+    (s) => s.status === "completed",
+  );
   return (
     <Surface>
       <FlatList

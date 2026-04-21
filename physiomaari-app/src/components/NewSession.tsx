@@ -7,7 +7,10 @@ import { colors } from "../ui/colors";
 import { testAddSession } from "../firebase/firestoreTest";
 import { addSession } from "../firebase/saveSessionFirestore";
 
-export default function NewSession() {
+type Props = {
+  onSessionCreated: (id: string) => void;
+};
+export default function NewSession({ onSessionCreated }: Props) {
   const [sessionTitle, setSessionTitle] = useState("");
   const [sessionDescription, setSessionDescription] = useState("");
   const [datePlanned, setDatePlanned] = useState("");
@@ -15,7 +18,9 @@ export default function NewSession() {
 
   const [exercises, setExercies] = useState([]);
 
-  function createSessionAndSave(
+  //funktio, joka ottaa vastaan tiedot lomakkeelta
+  //luo uuden olion, ja lähettää sen addSessionilla firestoreen
+  async function createSessionAndSave(
     title: string,
     description: string,
     date: string,
@@ -28,7 +33,9 @@ export default function NewSession() {
       userId: userId,
     };
 
-    addSession(newSession);
+    const id = await addSession(newSession);
+
+    onSessionCreated(id);
   }
 
   return (

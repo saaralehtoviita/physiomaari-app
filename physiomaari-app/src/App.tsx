@@ -3,7 +3,6 @@ import { Provider as PaperProvider } from "react-native-paper";
 import UserBottomTabNavigation from "./navigation/UserBottomTabNavigation";
 import { NavigationContainer } from "@react-navigation/native";
 import { UserRole, AppUser } from "./types/User";
-import { demoUsers } from "../demodata";
 import CoachBottomTabNavigation from "./navigation/CoachBottomTabNavigation";
 import { UsersProvider, useUsers } from "./hooks/UserContext";
 import { SessionsProvider } from "./hooks/SessionsContext";
@@ -15,7 +14,7 @@ export default function App() {
 
     return (
       <NavigationContainer>
-        {activeUser.role === "coach" ? (
+        {activeUser?.role === "coach" ? (
           <CoachBottomTabNavigation />
         ) : (
           <UserBottomTabNavigation />

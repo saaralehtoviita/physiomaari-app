@@ -3,11 +3,31 @@ import { Surface, Text, TextInput, Button } from "react-native-paper";
 import { styles } from "../ui/styles";
 import { colors } from "../ui/colors";
 import { useState } from "react";
+import { testAddSession } from "../firebase/firestoreTest";
+import { SessionExercise } from "../types/Exercise";
+import { addExerciseTosession } from "../firebase/saveSessionFirestore";
 
-export default function NewExercise() {
+type Props = {
+  sessionId: string | null;
+};
+export default function NewExercise({ sessionId }: Props) {
   const [exerciseTitle, setExerciseTitle] = useState("");
   const [exerciseDescription, setExerciseDescription] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+
+  function createExerciseAndSave() {
+    if (!sessionId) {
+      console.log("Cant add exercise without session");
+      return;
+    }
+    const newExercise: SessionExercise = {
+      title: exerciseTitle,
+      description: exerciseDescription,
+      videoUrl: videoUrl,
+    };
+
+    addExerciseTosession(newExercise, sessionId);
+  }
 
   return (
     <View style={styles.containerSession}>
@@ -57,11 +77,9 @@ export default function NewExercise() {
         rippleColor={colors.gray}
         contentStyle={{ height: 50 }}
         labelStyle={{ fontSize: 15 }}
-        onPress={() =>
-          saveExercise(exerciseTitle, exerciseDescription, videoUrl)
-        }
+        onPress={() => createExerciseAndSave()}
       >
-        Save Session
+        Save Exercise
       </Button>
     </View>
   );

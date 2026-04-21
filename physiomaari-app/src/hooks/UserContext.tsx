@@ -14,7 +14,7 @@ const UsersContext = createContext<UsersContextType | undefined>(undefined);
 export function UsersProvider({ children }: any) {
   const [users, setUsers] = useState<AppUser[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeUser, setActiveUser] = useState<AppUser | null>(null);
+  const [activeUser, setActiveUser] = useState<AppUser>();
 
   //users listana 0 = coach (Veikko Valmentaja)
   //1= user (Pentti Penkkaaja)

@@ -2,19 +2,10 @@ import { FlatList, Text } from "react-native";
 import { Surface } from "react-native-paper";
 import { styles } from "../ui/styles";
 import { TrainingSession } from "../types/Exercise";
-import { getSessions } from "../firebase/getAllSessions";
-import { useEffect, useState } from "react";
+import { useSessions } from "../hooks/SessionsContext";
 
 export default function ExercisesUpcoming() {
-  const [sessions, setSessions] = useState<TrainingSession[]>([]);
-
-  useEffect(() => {
-    async function load() {
-      const data = await getSessions();
-      setSessions(data);
-    }
-    load();
-  }, []);
+  const { sessions } = useSessions();
 
   const sessionsUpcoming: TrainingSession[] = sessions.filter(
     (s) => s.status === "upcoming",

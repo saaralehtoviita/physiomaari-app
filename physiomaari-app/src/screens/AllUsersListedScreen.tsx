@@ -1,5 +1,4 @@
 import { Surface, Text } from "react-native-paper";
-import { demoUsers } from "../../demodata";
 import { styles } from "../ui/styles";
 import { FlatList } from "react-native";
 import { useUsers } from "../hooks/UserContext";
