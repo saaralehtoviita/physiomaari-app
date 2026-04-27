@@ -40,7 +40,7 @@ export function SessionsProvider({ children }: any) {
 export function useSessions() {
   const context = useContext(SessionsContext);
   if (!context) {
-    throw new Error("useUsers must be used inside UsersProvider");
+    throw new Error("useSessions must be used inside UsersProvider");
   }
 
   return context;
