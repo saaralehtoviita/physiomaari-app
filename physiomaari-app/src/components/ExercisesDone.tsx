@@ -4,6 +4,8 @@ import { styles } from "../ui/styles";
 import { TrainingSession } from "../types/Exercise";
 import { useSessions } from "../hooks/SessionsContext";
 
+//käyttäjän tehdyt treenit listataan tässä
+//täältä puuttuu aktiivisen käyttäjän haku, nyt näkyy kaikki tehdyt treenit
 export default function ExercisesDone() {
   const { sessions } = useSessions();
 
