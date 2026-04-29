@@ -3,16 +3,17 @@ export type ExerciseStatus = "completed" | "upcoming";
 
 export type TrainingSession = {
   userId?: string; //muutetaan pakolliseksi, kun kanta ja testikäyttäjät käytössä
-  sessionId?: string;
+  sessionId: string;
   title: string;
   description: string;
   datePlanned: string;
-  status?: SessionStatus;
+  dateCompleted?: string; //ei pakollinen, koska aluksi null
+  status: SessionStatus;
   exercises?: SessionExercise[];
 };
 
 export type SessionExercise = {
-  exerciseId?: number;
+  exerciseId: string;
   title: string;
   description: string;
   status?: ExerciseStatus;

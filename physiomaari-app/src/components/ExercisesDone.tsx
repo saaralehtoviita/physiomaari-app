@@ -17,7 +17,12 @@ export default function ExercisesDone() {
       <FlatList
         style={styles.userList}
         data={sessionsUpcoming}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
+        renderItem={({ item }) => (
+          <>
+            <Text>{item.title}</Text>
+            <Text>{item.exercises?.map((e) => e.title)}</Text>
+          </>
+        )}
       ></FlatList>
     </Surface>
   );

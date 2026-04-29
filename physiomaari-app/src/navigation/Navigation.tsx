@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import ExercisesDone from "../components/ExercisesDone";
-import ExercisesUpcoming from "../components/ExercisesUpcoming";
+import ExercisesUpcoming from "../components/SessionsUpcoming";
 import HomeScreen from "../screens/UserHomeScreen";
 
 const Stack = createNativeStackNavigator();

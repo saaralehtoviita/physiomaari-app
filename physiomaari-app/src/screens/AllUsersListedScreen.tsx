@@ -5,7 +5,7 @@ import { useUsers } from "../hooks/UserContext";
 
 //tässä listataan kaikki käyttäjät
 //tämä näkymä vain coachille
-//mahdollisesti tätä kautta etsitään oikea käyttäjä ja navigoidaan addsessionscreenille jolloin tätä kautta määräytyy userId
+//tätä kautta etsitään jatkossa oikea käyttäjä ja navigoidaan addsessionscreenille jolloin tätä kautta määräytyy userId
 
 export default function AllUsersListedScreen() {
   const { users } = useUsers();

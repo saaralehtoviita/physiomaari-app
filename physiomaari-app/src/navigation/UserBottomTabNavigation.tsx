@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import UserHomeScreen from "../screens/UserHomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ExerciseTrackerScreen from "../screens/ExerciseTrackerScreen";
-import ExercisesUpcoming from "../components/ExercisesUpcoming";
+import ExercisesUpcoming from "../components/SessionsUpcoming";
 import ExercisesDone from "../components/ExercisesDone";
 import { FlatListComponent } from "react-native";
 import { styles } from "../ui/styles";
