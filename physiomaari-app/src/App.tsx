@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import UserBottomTabNavigation from "./navigation/UserBottomTabNavigation";
 import { NavigationContainer } from "@react-navigation/native";
