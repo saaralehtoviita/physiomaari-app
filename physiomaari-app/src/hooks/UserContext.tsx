@@ -4,8 +4,8 @@ import { getUsers } from "../firebase/getAllUsers";
 
 type UsersContextType = {
   users: AppUser[];
-  activeUser: AppUser;
-  setActiveUser: (user: AppUser) => void;
+  activeUser: AppUser | undefined;
+  setActiveUser: (user: AppUser) => void; //aktiivisen käyttäjän vaihtamista varten
   loading: boolean;
 };
 
@@ -16,6 +16,13 @@ export function UsersProvider({ children }: any) {
   const [loading, setLoading] = useState(true);
   const [activeUser, setActiveUser] = useState<AppUser>();
 
+  const DEMO_USERS = {
+    coach: "CkR92KBykohP60RPBU3Q",
+    pentti: "KLuymQdV0NgAPkiScnAn",
+    jenni: "U7j6pFUG8qlwxKtpVAPo",
+  };
+
+  //datan hakeminen apufunktion kautta firestoresta
   //users listana 0 = coach (Veikko Valmentaja)
   //1= user (Pentti Penkkaaja)
   //2= user (Jenni Jumppanen)
@@ -23,12 +30,13 @@ export function UsersProvider({ children }: any) {
     async function load() {
       const data = await getUsers();
       setUsers(data);
-      setActiveUser(data[0]);
+      setActiveUser(data.find((u) => u.appUserId === DEMO_USERS.pentti));
       setLoading(false);
     }
     load();
   }, []);
 
+  //kaikki "käärityt" children komponentit saa käyttöön tiedot
   return (
     <UsersContext.Provider
       value={{ users, activeUser, setActiveUser, loading }}
