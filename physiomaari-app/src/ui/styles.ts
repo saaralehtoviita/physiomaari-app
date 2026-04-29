@@ -60,5 +60,7 @@ export const styles = StyleSheet.create({
     width: 150,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: colors.primary,
+    color: colors.white,
   },
 });
