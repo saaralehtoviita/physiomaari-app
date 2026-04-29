@@ -40,5 +40,8 @@ yarn-error.*
 /ios
 /android
 
-#firestore
+#firebase
 src/firebase/config.ts
+src/firebase/googleAuth.ts
+
+
