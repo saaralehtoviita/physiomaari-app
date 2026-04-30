@@ -6,4 +6,6 @@ export const colors = {
   white: "#FFFFFF",
   text: "#000000",
   gray: "#888888",
+  view: "#8299af",
+  completed: "#2E7D32",
 };

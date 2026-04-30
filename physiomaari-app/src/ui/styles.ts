@@ -63,4 +63,50 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     color: colors.white,
   },
+  viewButton: {
+    width: "auto",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.view,
+    color: colors.primary,
+    marginHorizontal: 16,
+  },
+  completeButton: {
+    width: 150,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.completed,
+    color: colors.white,
+    marginTop: 5,
+  },
+  surfaceTop: {
+    padding: 12,
+    alignItems: "flex-start",
+    width: "100%",
+  },
+  surfaceContent: {
+    padding: 6,
+    alignItems: "flex-start",
+    width: "100%",
+    margin: 6,
+  },
+  accordion: {
+    backgroundColor: colors.white,
+    color: colors.text,
+    borderRadius: 12,
+    elevation: 2,
+  },
+  accordionSurface: {
+    paddingBottom: 5,
+    backgroundColor: colors.background,
+    borderRadius: 5,
+  },
+  mediumTitle: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  smallTitle: {
+    fontWeight: "bold",
+    fontSize: 15,
+  },
 });
