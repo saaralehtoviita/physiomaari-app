@@ -5,6 +5,7 @@ import { UserRole, AppUser } from "./types/User";
 import CoachBottomTabNavigation from "./navigation/CoachBottomTabNavigation";
 import { UsersProvider, useUsers } from "./hooks/UserContext";
 import { SessionsProvider } from "./hooks/SessionsContext";
+import UserStackNavigation from "./navigation/Navigation";
 
 export default function App() {
   function AppContent() {
@@ -16,7 +17,7 @@ export default function App() {
         {activeUser?.role === "coach" ? (
           <CoachBottomTabNavigation />
         ) : (
-          <UserBottomTabNavigation />
+          <UserStackNavigation />
         )}
       </NavigationContainer>
     );
