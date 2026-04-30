@@ -1,22 +1,24 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import ExercisesDone from "../components/ExercisesDone";
-import ExercisesUpcoming from "../components/SessionsUpcoming";
-import HomeScreen from "../screens/UserHomeScreen";
+import UserBottomTabNavigation from "./UserBottomTabNavigation";
+import SessionView from "../components/SessionView";
 
 const Stack = createNativeStackNavigator();
 
-function Navigation() {
+export default function UserStackNavigation() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Completed exercises" component={ExercisesDone} />
-        <Stack.Screen name="Upcoming exercises" component={ExercisesUpcoming} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Tabs"
+        component={UserBottomTabNavigation}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SessionView"
+        component={SessionView}
+        options={{ title: "Session" }}
+      />
+    </Stack.Navigator>
   );
 }
-
-export default Navigation;

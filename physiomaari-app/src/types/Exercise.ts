@@ -3,7 +3,7 @@ export type ExerciseStatus = "completed" | "upcoming";
 
 export type TrainingSession = {
   userId?: string; //muutetaan pakolliseksi, kun kanta ja testikäyttäjät käytössä
-  sessionId: string;
+  id: string;
   title: string;
   description: string;
   datePlanned: string;
@@ -13,7 +13,7 @@ export type TrainingSession = {
 };
 
 export type SessionExercise = {
-  exerciseId: string;
+  id: string;
   title: string;
   description: string;
   status?: ExerciseStatus;
@@ -21,8 +21,9 @@ export type SessionExercise = {
 };
 
 export type UserComment = {
-  userCommentId: string;
+  id: string;
   comment: string;
   exerciseId: string;
   userId: string;
+  commentWritten?: string; //aluksi null, tallennetaan vasta kun kommentti luodaan
 };
