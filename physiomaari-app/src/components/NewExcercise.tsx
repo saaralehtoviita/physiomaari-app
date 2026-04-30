@@ -21,6 +21,7 @@ export default function NewExercise({ sessionId }: Props) {
       return;
     }
     const newExercise: SessionExercise = {
+      id: "",
       title: exerciseTitle,
       description: exerciseDescription,
       videoUrl: videoUrl,

@@ -20,16 +20,13 @@ export default function NewSession({ onSessionCreated }: Props) {
 
   //funktio, joka ottaa vastaan tiedot lomakkeelta
   //luo uuden olion, ja lähettää sen addSessionilla firestoreen
-  async function createSessionAndSave(
-    title: string,
-    description: string,
-    date: string,
-    userId: string,
-  ) {
+  async function createSessionAndSave() {
     const newSession: TrainingSession = {
+      id: "",
+      status: "upcoming",
       title: sessionTitle,
-      description: description,
-      datePlanned: date,
+      description: sessionDescription,
+      datePlanned: datePlanned,
       userId: userId,
     };
 
