@@ -1,5 +1,5 @@
 import { db } from "../firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { TrainingSession, SessionExercise } from "../types/Exercise";
 
 //funktio ottaa vastaan TrainingSession olion
@@ -12,6 +12,7 @@ export async function addSession(session: TrainingSession) {
       datePlanned: session.datePlanned,
       userId: session.userId,
       status: "upcoming",
+      createdAt: serverTimestamp(),
     });
     console.log("Document writted with ID: ", sessionRef.id);
     return sessionRef.id;
@@ -30,12 +31,14 @@ export async function addExerciseTosession(
       {
         title: exercise.title,
         description: exercise.description,
-        status: "upcoming",
-        videoURL: exercise.videoUrl,
+        status: exercise.status ?? "upcoming",
+        videoUrl: exercise.videoUrl,
       },
     );
     console.log("Exercise document written with ID: ", exRef.id);
+    return exRef.id;
   } catch (e) {
     console.error("error adding document: ", e);
+    throw e;
   }
 }
