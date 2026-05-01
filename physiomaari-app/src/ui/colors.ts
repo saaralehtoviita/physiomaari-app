@@ -7,5 +7,6 @@ export const colors = {
   text: "#000000",
   gray: "#888888",
   view: "#8299af",
-  completed: "#2E7D32",
+  completedLight: "#6e9670",
+  backgroundDarker: "#c3d6e7",
 };

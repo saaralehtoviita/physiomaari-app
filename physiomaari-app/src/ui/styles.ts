@@ -39,6 +39,7 @@ export const styles = StyleSheet.create({
   sessionInput: {
     flex: 1,
     width: 100,
+    backgroundColor: colors.background,
   },
   container: {
     margin: 10,
@@ -62,6 +63,8 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: colors.primary,
     color: colors.white,
+    marginBottom: 2,
+    marginTop: 2,
   },
   viewButton: {
     width: "auto",
@@ -75,38 +78,60 @@ export const styles = StyleSheet.create({
     width: 150,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.completed,
-    color: colors.white,
+    backgroundColor: colors.completedLight,
+    //color: colors.white,
     marginTop: 5,
+  },
+  buttonDate: {
+    width: "100%",
+    borderRadius: 2,
+    backgroundColor: colors.background,
   },
   surfaceTop: {
     padding: 12,
     alignItems: "flex-start",
     width: "100%",
+    backgroundColor: colors.background,
   },
   surfaceContent: {
     padding: 6,
     alignItems: "flex-start",
     width: "100%",
     margin: 6,
+    backgroundColor: colors.backgroundDarker,
+    borderRadius: 5,
+  },
+  surfaceCards: {
+    alignItems: "stretch",
+    backgroundColor: colors.backgroundDarker,
   },
   accordion: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.backgroundDarker,
     color: colors.text,
     borderRadius: 12,
     elevation: 2,
   },
   accordionSurface: {
-    paddingBottom: 5,
+    paddingBottom: 10,
     backgroundColor: colors.background,
     borderRadius: 5,
   },
   mediumTitle: {
     fontWeight: "bold",
     fontSize: 20,
+    marginBottom: 7,
   },
   smallTitle: {
     fontWeight: "bold",
     fontSize: 15,
+  },
+  description: {
+    fontWeight: 600,
+    fontSize: 15,
+    fontStyle: "italic",
+  },
+  card: {
+    backgroundColor: colors.background,
+    borderRadius: 5,
   },
 });
