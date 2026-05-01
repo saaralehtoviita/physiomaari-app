@@ -21,7 +21,7 @@ export async function addComment(
       ),
       {
         comment: comment.comment,
-        userId: comment.userCommentId,
+        userId: comment.id,
         exerciseId: comment.exerciseId,
         commentWritten: serverTimestamp(),
       },

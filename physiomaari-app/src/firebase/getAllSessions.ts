@@ -1,4 +1,10 @@
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getCountFromServer,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "./config";
 import { TrainingSession } from "../types/Exercise";
 
@@ -30,14 +36,52 @@ export async function getSessions(): Promise<TrainingSession[]> {
     //sessionId tulee automaattisesti generoidusta dokumenttinumerosta
     //muut tiedot tallennetusta datasta
     sessions.push({
-      sessionId: docSnap.id,
+      id: docSnap.id,
       title: d.title,
       description: d.description,
-      datePlanned: d.datePlanned,
+      datePlanned: d.datePlanned?.toDate?.() ?? null,
+      dateCompleted: d.dateCompleted?.toDate?.() ?? null,
       userId: d.userId,
       status: d.status,
       exercises,
-    } as unknown as TrainingSession);
+    } as TrainingSession);
   }
   return sessions;
+}
+
+//yhden käyttäjän sessioiden haku
+//vastaa pyyntöä GET /sessions/userId
+export async function getUserSessions(
+  userId: string,
+): Promise<TrainingSession[]> {
+  const q = query(collection(db, "sessions"), where("userId", "==", userId));
+
+  const snapshot = await getDocs(q);
+
+  const sessions: TrainingSession[] = [];
+
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+
+    sessions.push({
+      id: docSnap.id,
+      title: data.title,
+      description: data.description,
+      datePlanned: data.datePlanned?.toDate?.() ?? null,
+      dateCompleted: data.dateCompleted?.toDate?.() ?? null,
+      userId: data.userId,
+      status: data.status,
+    } as TrainingSession);
+  });
+
+  return sessions;
+}
+
+//yhden käyttäjän sessioiden laskeminen
+export async function countUserSessions(userId: string) {
+  const q = query(collection(db, "sessions"), where("userId", "==", userId));
+
+  const snapshot = await getCountFromServer(q);
+
+  return snapshot.data().count;
 }

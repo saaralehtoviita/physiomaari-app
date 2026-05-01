@@ -1,6 +1,13 @@
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getCountFromServer,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "./config";
 import { AppUser } from "../types/User";
+import { TrainingSession } from "../types/Exercise";
 
 export async function getUsers(): Promise<AppUser[]> {
   const snapshot = await getDocs(collection(db, "appUsers"));
@@ -9,7 +16,7 @@ export async function getUsers(): Promise<AppUser[]> {
     const d = doc.data();
 
     return {
-      appUserId: doc.id,
+      id: doc.id,
       lastName: d.lastName,
       firstName: d.firstName,
       email: d.email,
