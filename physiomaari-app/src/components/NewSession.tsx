@@ -1,26 +1,56 @@
 import { useState } from "react";
 import { TrainingSession } from "../types/Exercise";
-import { Surface, Text, TextInput, Button } from "react-native-paper";
+import { Surface, Text, TextInput, Button, Menu } from "react-native-paper";
 import { View } from "react-native";
 import { styles } from "../ui/styles";
 import { colors } from "../ui/colors";
 import { testAddSession } from "../firebase/firestoreTest";
 import { addSession } from "../firebase/saveSessionFirestore";
+import { useUsers } from "../hooks/UserContext";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 type Props = {
   onSessionCreated: (id: string) => void;
 };
 export default function NewSession({ onSessionCreated }: Props) {
+  const { users } = useUsers();
+  const [userId, setUserId] = useState("");
+
+  const [visible, setVisible] = useState(false);
+
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
+
   const [sessionTitle, setSessionTitle] = useState("");
   const [sessionDescription, setSessionDescription] = useState("");
   const [datePlanned, setDatePlanned] = useState("");
-  const [userId, setUserId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [pickerVisible, setPickerVisible] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const [exercises, setExercies] = useState([]);
+  function onChange(event: any, selectedDate?: Date) {
+    setPickerVisible(false);
+
+    if (selectedDate) {
+      setDate(selectedDate);
+      setDatePlanned(selectedDate.toISOString());
+    }
+  }
 
   //funktio, joka ottaa vastaan tiedot lomakkeelta
   //luo uuden olion, ja lähettää sen addSessionilla firestoreen
   async function createSessionAndSave() {
+    if (!sessionTitle || !sessionDescription || !datePlanned) {
+      setErrorMessage("Please fill in values for title, description and date.");
+      return;
+    }
+
+    if (!userId) {
+      setErrorMessage("Please select a user.");
+      return;
+    }
+
     const newSession: TrainingSession = {
       id: "",
       status: "upcoming",
@@ -33,80 +63,106 @@ export default function NewSession({ onSessionCreated }: Props) {
     const id = await addSession(newSession);
 
     onSessionCreated(id);
+
+    setSessionTitle("");
+    setSessionDescription("");
+    setDatePlanned("");
+
+    setMessage(
+      `Session ${sessionTitle}  added succesfully! You can now add exercises to session.`,
+    );
   }
 
   return (
-    <Surface style={styles.container}>
-      <View style={styles.containerSession}>
-        <Text style={styles.heading}>Add new session</Text>
+    <Surface style={styles.surfaceContent}>
+      <View style={styles.surfaceContent}>
+        <Text style={styles.mediumTitle}>Add new session</Text>
         <View style={styles.row}>
-          <Text style={[styles.subHeading, styles.sessionLabel]}>
-            Session title:
-          </Text>
+          {/* <Text style={[styles.subHeading, styles.sessionLabel]}>Title:</Text> */}
           <TextInput
             style={styles.sessionInput}
             value={sessionTitle}
             onChangeText={setSessionTitle}
             keyboardType="default"
-            placeholder="Session title"
+            placeholder="...session title"
+            label="Title"
           />
         </View>
         <View style={styles.row}>
-          <Text style={[styles.subHeading, styles.sessionLabel]}>
-            Session description:
-          </Text>
           <TextInput
             style={styles.sessionInput}
             value={sessionDescription}
             onChangeText={setSessionDescription}
             keyboardType="default"
-            placeholder="Session description"
+            placeholder="...session description"
+            multiline
             numberOfLines={10}
             textColor={colors.primary}
+            label="Description"
           />
         </View>
         <View style={styles.row}>
-          <Text style={[styles.subHeading, styles.sessionLabel]}>
-            Planned date:
-          </Text>
-          <TextInput
-            style={styles.sessionInput}
-            value={datePlanned}
-            onChangeText={setDatePlanned}
-            keyboardType="default"
-            placeholder="Planned date"
-            textColor={colors.primary}
-          />
+          <Button
+            mode="outlined"
+            style={styles.buttonDate}
+            contentStyle={{ height: 50, justifyContent: "flex-start" }}
+            onPress={() => setPickerVisible(true)}
+          >
+            {datePlanned
+              ? new Date(datePlanned).toLocaleDateString("fi-FI")
+              : "Select date"}
+          </Button>
+
+          {pickerVisible && (
+            <DateTimePicker
+              value={date}
+              mode="date"
+              display="default"
+              onChange={onChange}
+            />
+          )}
         </View>
-        <View style={styles.row}>
-          <Text style={[styles.subHeading, styles.sessionLabel]}>User ID:</Text>
-          <TextInput
-            style={styles.sessionInput}
-            value={userId}
-            onChangeText={setUserId}
-            keyboardType="default"
-            placeholder="User ID"
-            textColor={colors.primary}
-          />
-        </View>
+        <Menu
+          visible={visible}
+          onDismiss={closeMenu}
+          anchor={
+            <Button
+              mode="contained"
+              style={styles.basicButton}
+              onPress={openMenu}
+            >
+              {userId
+                ? users.find((u) => u.id === userId)?.username
+                : "Select user"}
+            </Button>
+          }
+        >
+          {users.map((user) => (
+            <Menu.Item
+              key={user.id}
+              onPress={() => {
+                setUserId(user.id);
+                closeMenu();
+              }}
+              title={user.username}
+            />
+          ))}
+        </Menu>
         <Button
           mode="contained"
-          style={styles.basicButton}
-          buttonColor={colors.primary}
-          rippleColor={colors.gray}
-          contentStyle={{ height: 50 }}
-          labelStyle={{ fontSize: 15 }}
-          onPress={() =>
-            createSessionAndSave(
-              sessionTitle,
-              sessionDescription,
-              datePlanned,
-              userId,
-            )
-          }
+          style={styles.completeButton}
+          onPress={() => createSessionAndSave()}
         >
           Save Session
         </Button>
+        {errorMessage ? (
+          <Text style={{ color: colors.error, marginTop: 10 }}>
+            {errorMessage}
+          </Text>
+        ) : null}
+        {message ? (
+          <Text style={{ color: colors.text, marginTop: 10 }}>{message}</Text>
+        ) : null}
       </View>
     </Surface>
   );

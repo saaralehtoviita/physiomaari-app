@@ -7,6 +7,7 @@ import { styles } from "../ui/styles";
 import { addComment } from "../firebase/saveComment";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { ScrollView } from "react-native";
 
 export default function SessionView() {
   const route = useRoute();
@@ -41,7 +42,7 @@ export default function SessionView() {
       setMessage("Please write a comment");
     }
     const newComment: UserComment = {
-      userCommentId: "", //firebase generoi
+      id: "", //firebase generoi
       comment: commentToSave,
       userId: session?.userId,
       exerciseId: exerciseId,
@@ -49,6 +50,8 @@ export default function SessionView() {
 
     addComment(sessionId, exerciseId, newComment);
   }
+
+  async function handleCompleteExercise() {}
 
   //sessiom merkitseminen tehdyksi
   async function handleComplete() {
@@ -59,42 +62,52 @@ export default function SessionView() {
 
   return (
     <SafeAreaView>
-      <Surface style={styles.surfaceTop} elevation={2}>
-        <Text style={styles.mediumTitle}>
-          <MaterialCommunityIcons name="list-box" size={22} />
-          {session?.title.toUpperCase()}
-        </Text>
-        <Text style={styles.smallTitle}>
-          <MaterialCommunityIcons name="calendar" size={20} />
-          {session?.datePlanned}
-        </Text>
-        <Text variant="bodyLarge">
-          <MaterialCommunityIcons name="text" size={18} />
-          {session?.description}
-        </Text>
-        {session?.exercises?.map((e) => (
-          <Surface style={styles.surfaceContent} elevation={4}>
-            <Text variant="bodyLarge">Exercise title: {e.title}</Text>
-            <TextInput
-              mode="outlined"
-              style={{ width: "100%" }}
-              label="Comment"
-              value={comment}
-              placeholder="...write comment"
-              onChangeText={setComment}
-              multiline
-              numberOfLines={6}
-            />
-            <Button
-              style={styles.completeButton}
-              onPress={() => createCommentAndSave(e.id)}
-            >
-              Add comment
-            </Button>
-          </Surface>
-        ))}
-      </Surface>
-      <Button onPress={handleComplete}>Complete session</Button>
+      <ScrollView>
+        <Surface style={styles.surfaceTop} elevation={2}>
+          <Text style={styles.mediumTitle}>
+            <MaterialCommunityIcons name="list-box" size={22} />
+            {session?.title.toUpperCase()}
+          </Text>
+          <Text style={styles.smallTitle}>
+            <MaterialCommunityIcons name="calendar" size={20} />
+            {session?.datePlanned.substring(0, 10)}
+          </Text>
+          <Text style={styles.description}>
+            <MaterialCommunityIcons name="text" size={18} />
+            {session?.description}
+          </Text>
+          {session?.exercises?.map((e) => (
+            <Surface style={styles.surfaceContent} elevation={4}>
+              <Text style={styles.smallTitle}>{e.title.toUpperCase()}</Text>
+              <Text style={styles.description}>{e.description}</Text>
+              <TextInput
+                mode="outlined"
+                style={{ width: "100%" }}
+                label="Comment"
+                value={comment}
+                placeholder="...write comment"
+                onChangeText={setComment}
+                multiline
+                numberOfLines={6}
+              />
+              <Button
+                style={styles.completeButton}
+                textColor="white"
+                onPress={() => createCommentAndSave(e.id)}
+              >
+                Add comment
+              </Button>
+            </Surface>
+          ))}
+        </Surface>
+        <Button
+          style={styles.basicButton}
+          textColor="white"
+          onPress={handleComplete}
+        >
+          Complete session
+        </Button>
+      </ScrollView>
     </SafeAreaView>
   );
 }

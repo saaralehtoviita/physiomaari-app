@@ -4,22 +4,27 @@ import { TrainingSession } from "../types/Exercise";
 import { setStatusToCompleted } from "../firebase/updateSession";
 import { styles } from "../ui/styles";
 import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../types/navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {
   session: TrainingSession;
 };
+
+type Nav = NativeStackNavigationProp<RootStackParamList>;
 
 export default function Session({ session }: Props) {
   //haitarin sulkeminen/avaaminen
   const [expanded, setExpanded] = useState(false);
   const handlePress = () => setExpanded(!expanded);
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<Nav>();
 
   function viewSession() {
-    if (!session.sessionId) return;
+    console.log(session.id);
+    if (!session.id) return;
     navigation.navigate("SessionView", {
-      sessionId: session.sessionId,
+      sessionId: session.id,
     });
   }
 
