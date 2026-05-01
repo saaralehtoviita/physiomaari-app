@@ -20,6 +20,7 @@ export function UsersProvider({ children }: any) {
     coach: "CkR92KBykohP60RPBU3Q",
     pentti: "KLuymQdV0NgAPkiScnAn",
     jenni: "U7j6pFUG8qlwxKtpVAPo",
+    uuno: "Ez9KXq9NrEukUr6Dylr8",
   };
 
   //datan hakeminen apufunktion kautta firestoresta
@@ -30,7 +31,7 @@ export function UsersProvider({ children }: any) {
     async function load() {
       const data = await getUsers();
       setUsers(data);
-      setActiveUser(data.find((u) => u.appUserId === DEMO_USERS.pentti));
+      setActiveUser(data.find((u) => u.id === DEMO_USERS.jenni));
       setLoading(false);
     }
     load();

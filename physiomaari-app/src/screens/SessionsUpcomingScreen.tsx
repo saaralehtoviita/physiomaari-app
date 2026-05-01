@@ -7,21 +7,18 @@ import { useUsers } from "../hooks/UserContext";
 import Session from "../components/Session";
 
 //käyttäjän tulevat treenit listataan tässä
-//täältä puuttuu aktiivisen käyttäjän haku, nyt näkyy kaikki tulevat treenit
+//vain aktiivisen käyttäjän treenit, joilla on otsikko, näytetään
 export default function SessionsUpcomingScreen() {
   const { sessions } = useSessions();
   const { activeUser } = useUsers();
 
   const sessionsUpcoming: TrainingSession[] = sessions.filter(
-    (s) =>
-      s.status === "upcoming" &&
-      s.userId === activeUser?.appUserId &&
-      !!s.title,
+    (s) => s.status === "upcoming" && s.userId === activeUser?.id && !!s.title,
   );
   return (
     <FlatList
       data={sessionsUpcoming}
-      keyExtractor={(item) => item.sessionId}
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => <Session session={item} />}
     />
   );
