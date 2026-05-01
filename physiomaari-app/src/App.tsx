@@ -1,7 +1,7 @@
 import { Provider as PaperProvider } from "react-native-paper";
-import UserBottomTabNavigation from "./navigation/UserBottomTabNavigation";
+
 import { NavigationContainer } from "@react-navigation/native";
-import { UserRole, AppUser } from "./types/User";
+
 import CoachBottomTabNavigation from "./navigation/CoachBottomTabNavigation";
 import { UsersProvider, useUsers } from "./hooks/UserContext";
 import { SessionsProvider } from "./hooks/SessionsContext";
