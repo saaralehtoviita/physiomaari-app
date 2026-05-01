@@ -7,7 +7,7 @@ export type TrainingSession = {
   title: string;
   description: string;
   datePlanned: string;
-  dateCompleted?: string; //ei pakollinen, koska aluksi null
+  dateCompleted?: Date; //ei pakollinen, koska aluksi null
   status: SessionStatus;
   exercises?: SessionExercise[];
 };
