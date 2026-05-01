@@ -12,11 +12,15 @@ export default function AddSessionScreen() {
   const [sessionId, setSessionId] = useState("");
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ padding: 10, gap: 10 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 10,
+          gap: 10,
+        }}
+      >
         <NewSession onSessionCreated={setSessionId} />
         <NewExercise sessionId={sessionId} />
-        <Button style={styles.basicButton}>Another exercise</Button>
       </ScrollView>
     </SafeAreaView>
   );
