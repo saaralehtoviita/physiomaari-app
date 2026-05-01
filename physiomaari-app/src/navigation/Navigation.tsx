@@ -3,7 +3,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import UserBottomTabNavigation from "./UserBottomTabNavigation";
 import SessionView from "../components/SessionView";
 
-const Stack = createNativeStackNavigator();
+import type { RootStackParamList } from "../types/navigation";
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function UserStackNavigation() {
   return (

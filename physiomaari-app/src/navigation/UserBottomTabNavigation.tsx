@@ -2,8 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import UserHomeScreen from "../screens/UserHomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ExerciseTrackerScreen from "../screens/ExerciseTrackerScreen";
-import ExercisesUpcoming from "../screens/SessionsUpcomingScreen";
-import ExercisesDone from "../components/ExercisesDone";
+import ExercisesDone from "../screens/SessionsCompletedScreen";
 import { FlatListComponent } from "react-native";
 import { styles } from "../ui/styles";
 import { Entypo } from "@expo/vector-icons";
@@ -12,6 +11,7 @@ import Octicons from "@expo/vector-icons/Octicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 import { colors } from "../ui/colors";
+import SessionsUpcomingScreen from "../screens/SessionsUpcomingScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -43,7 +43,7 @@ const UserBottomTabNavigation = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/*       <Tab.Screen
         name="Exercise Tracker"
         component={ExerciseTrackerScreen}
         options={{
@@ -51,10 +51,10 @@ const UserBottomTabNavigation = () => {
             <Ionicons name="stats-chart" size={30} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
-        name="Upcoming exercises"
-        component={ExercisesUpcoming}
+        name="Upcoming sessions"
+        component={SessionsUpcomingScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="ordered-list" size={30} color={color} />
@@ -62,7 +62,7 @@ const UserBottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Completed exercises"
+        name="Completed sessions"
         component={ExercisesDone}
         options={{
           tabBarIcon: ({ color, size }) => (

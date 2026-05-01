@@ -3,7 +3,7 @@ import CoachHomeScreen from "../screens/CoachHomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ExerciseTrackerScreen from "../screens/ExerciseTrackerScreen";
 import ExercisesUpcoming from "../screens/SessionsUpcomingScreen";
-import ExercisesDone from "../components/ExercisesDone";
+import ExercisesDone from "../screens/SessionsCompletedScreen";
 import { FlatListComponent } from "react-native";
 import { styles } from "../ui/styles";
 import { Entypo } from "@expo/vector-icons";
@@ -64,7 +64,7 @@ const UserBottomTabNavigation = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/*       <Tab.Screen
         name="List of sessions"
         component={SessionsListed}
         options={{
@@ -72,7 +72,7 @@ const UserBottomTabNavigation = () => {
             <Ionicons name="list" size={30} color={color} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
