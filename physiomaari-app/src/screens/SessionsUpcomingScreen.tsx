@@ -15,6 +15,10 @@ export default function SessionsUpcomingScreen() {
   const sessionsUpcoming: TrainingSession[] = sessions.filter(
     (s) => s.status === "upcoming" && s.userId === activeUser?.id && !!s.title,
   );
+
+  console.log("All sessions: ", sessionsUpcoming);
+  console.log("Active user: ", activeUser);
+
   return (
     <FlatList
       data={sessionsUpcoming}

@@ -7,7 +7,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useUsers } from "../hooks/UserContext";
 
 //käyttäjän tehdyt treenit listataan tässä
-//täältä puuttuu aktiivisen käyttäjän haku, nyt näkyy kaikki tehdyt treenit
+//jatkossa tätä kautta käyttäjä pääsee sessiota klikkaamalla tarkastelemaan yksittäistä sessiota ja muokkaamaan sen kommentteja
 export default function SessionsCompletedScreen() {
   const { sessions } = useSessions();
   const { activeUser } = useUsers();

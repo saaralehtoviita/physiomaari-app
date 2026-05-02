@@ -8,8 +8,18 @@ import { addComment } from "../firebase/saveComment";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ScrollView } from "react-native";
+import { colors } from "../ui/colors";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types/navigation";
 
+type Nav = NativeStackNavigationProp<RootStackParamList>;
+
+//komponentti, jolla näytetään käyttäjälle yksittäinen sessio harjoitteineen
+//tässä bugi: vain yksi useState kommentille - kun kirjoittaa kommenttia, kaikkien harjoitteiden kommenttikentät päivittyvät
+//--> tallennus kuitenkin taitaa onnistua
 export default function SessionView() {
+  const navigation = useNavigation<Nav>();
   const route = useRoute();
   const { sessionId } = route.params as {
     sessionId: string;
@@ -49,6 +59,12 @@ export default function SessionView() {
     };
 
     addComment(sessionId, exerciseId, newComment);
+
+    //kommenttikentän tyhjennys
+    setComment("");
+
+    //tänne metodi oikean harjoitteen etsimiseen ja merkitsemiseen tehdyksi
+    //(metodi puuttuu backendista)
   }
 
   async function handleCompleteExercise() {}
@@ -58,6 +74,13 @@ export default function SessionView() {
     if (session === undefined) return;
 
     await setStatusToCompleted(session.id);
+
+    setMessage("Comments saved and session marked as completed!");
+    setComment("");
+
+    navigation.navigate("Tabs", {
+      screen: "Upcoming sessions",
+    });
   }
 
   return (
@@ -70,7 +93,7 @@ export default function SessionView() {
           </Text>
           <Text style={styles.smallTitle}>
             <MaterialCommunityIcons name="calendar" size={20} />
-            {session?.datePlanned.substring(0, 10)}
+            {session?.datePlanned.toString()}
           </Text>
           <Text style={styles.description}>
             <MaterialCommunityIcons name="text" size={18} />
@@ -107,6 +130,9 @@ export default function SessionView() {
         >
           Complete session
         </Button>
+        {message ? (
+          <Text style={{ color: colors.completedLight }}>{message}</Text>
+        ) : null}
       </ScrollView>
     </SafeAreaView>
   );
