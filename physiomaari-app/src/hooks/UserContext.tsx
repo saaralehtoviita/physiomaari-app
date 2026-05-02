@@ -31,7 +31,7 @@ export function UsersProvider({ children }: any) {
     async function load() {
       const data = await getUsers();
       setUsers(data);
-      setActiveUser(data.find((u) => u.id === DEMO_USERS.jenni));
+      setActiveUser(data.find((u) => u.id === DEMO_USERS.pentti));
       setLoading(false);
     }
     load();

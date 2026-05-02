@@ -19,6 +19,7 @@ export default function Session({ session }: Props) {
   const [expanded, setExpanded] = useState(false);
   const handlePress = () => setExpanded(!expanded);
 
+  //session ja sessionviewn välinen navigaatio rakennettu tekoälyn avustuksella
   const navigation = useNavigation<Nav>();
 
   function viewSession() {

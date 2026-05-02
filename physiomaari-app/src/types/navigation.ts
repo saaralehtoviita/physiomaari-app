@@ -1,4 +1,6 @@
 export type RootStackParamList = {
-  Tabs: undefined;
+  Tabs: {
+    screen: "Upcoming sessions";
+  };
   SessionView: { sessionId: string };
 };

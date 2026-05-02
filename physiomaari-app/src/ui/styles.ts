@@ -133,5 +133,6 @@ export const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.background,
     borderRadius: 5,
+    marginBottom: 5,
   },
 });

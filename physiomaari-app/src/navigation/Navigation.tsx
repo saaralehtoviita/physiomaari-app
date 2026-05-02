@@ -5,6 +5,7 @@ import SessionView from "../components/SessionView";
 
 import type { RootStackParamList } from "../types/navigation";
 
+//sessionin ja sessionviewn välinen navigaatio rakennettu tekoälyn avustuksella
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function UserStackNavigation() {

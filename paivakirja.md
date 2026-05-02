@@ -21,7 +21,7 @@ Aloitin suunnittelun laatimalla listan sovelluksen vaatimuksista. Jaoin vaatimuk
 
 ### Rajaus
 
-Melko nopeasti huomasin, että valitsemani aihealue on erittäin laaja. Olin lähtenyt rakentamaan sovellusta, jonka kehittämiseen työelämässä varmasti tarvittaisiin usean henkilön pidempiaikainen työpanos. Työn alussa keskityin luomaan perus komponentteja ja screenejä ja onnistuin ensin luomaan toimivan useContextin, jolla navigaationäkymä vaihtui aktiivisen käyttäjän roolin perusteella. Käytin ensin kovakoodattua demodataa. Tämän jälkeen perehdyin Firestoreen ja onnistuin luomaan sinne yhteyden, muutin käyttäjätietoja käyttävän useContextin käyttämään kantaan suoraan tallennettuja käyttäjiä. Loin vielä toisen useContextin, jolla haetaan kaikki tallennettut sessiot. Tässä kohtaa aloin huomata, miten laaja aihe oli, ja etten tulisi ehtimään tekemään kaikkia toiminnallisuuksia. Päätin jättää yksillöllisen kalenterinäkymän tekemisen pois ja keskittyä autentikointiin.
+Melko nopeasti huomasin, että valitsemani aihealue on erittäin laaja. Olin lähtenyt rakentamaan sovellusta, jonka kehittämiseen työelämässä varmasti tarvittaisiin usean henkilön pidempiaikainen työpanos. Työn alussa keskityin luomaan perus komponentteja ja screenejä ja onnistuin ensin luomaan toimivan userContextin, jolla navigaationäkymä vaihtuu aktiivisen käyttäjän roolin perusteella. Käytin ensin kovakoodattua demodataa. Tämän jälkeen perehdyin Firestoreen ja onnistuin luomaan sinne yhteyden, muutin käyttäjätietoja käyttävän userContextin käyttämään kantaan suoraan tallennettuja käyttäjiä. Loin vielä toisen useContextin, jolla haetaan kaikki tallennettut sessiot. Tässä kohtaa aloin huomata, miten laaja aihe oli, ja etten tulisi ehtimään tekemään kaikkia toiminnallisuuksia. Päätin jättää yksillöllisen kalenterinäkymän tekemisen pois ja keskittyä autentikointiin.
 
 ### Firebase Autentikointi
 
@@ -34,4 +34,21 @@ Asiakas voi tarkastella tulevia sessioita harjoituksineen sekä avata yksittäis
 
 ## Mitä jäi puuttumaan
 
-Sovellus ei ole läheskään siinä kunnossa, kun mihin ajattelin voivani pystyä. Kehitysprosessin aikana tuli realiteetit vastaan, ja ymmärsin miten paljon aikaa kaikki suunnittelemani toiminnallisuudet tulevat viemään. Turhauttavaa oli, kun en saanut autentikointia toimimaan ja käytin siihen jonkun verran aikaa.
+Sovellus ei ole läheskään siinä kunnossa, kun mihin ajattelin voivani pystyä. Kehitysprosessin aikana tuli realiteetit vastaan, ja ymmärsin miten paljon aikaa kaikki suunnittelemani toiminnallisuudet tulevat viemään. Turhauttavaa oli, kun en saanut autentikointia toimimaan ja käytin siihen jonkun verran aikaa. Tajusin myös, että oikeastihan valmentaja ei varmaankaan suunnittele harjoitusohjelmia puhelimella. Valmentajan osuus saattaa siis olla "turha" ja jos jatkokehitän sovellusta, teen varmaan valmentajan näkymän esim Reactilla. En ehtinyt myöskään perehtyä youtube-videoiden lisäämiseen ja upottamiseen käyttäjän näkymässä. Paljon muitakin pieniä vaatimuksissa näkyviä pieniä toimintoja jäi puuttumaan.
+
+## Tekoälyn käyttö
+
+Hyödynsin tekoälyä Session ja SessionView:n välisen navigaation rakentamiseen. Käytin sitä myös autentikointikokeilussa, mutta huomasin nopeasti, ettei siitä ollut siinä kohtaa apua koska ehtinyt itse perehtyä autentikointimateriaaleihin. Tekoälyä käytin myös jonkun verran esimerkiksi ikonien ja React Native Paperin komponenttien nimien haussa sekä tyylien parantelussa. Mielestäni varsinkin näissä sen käyttö nopeuttaa työskentelyä kun dokumentaation hakemiseen ja lukemiseen menevä aika vähenee. Myös demodatan, mitä käytin alussa navigaationäkymän vaihdon ja userContextin testaamiseen, generoin suoraan tekoälyllä luomieni tyyppien perusteella.
+
+## Jatkokehitettävää
+
+- Koodirakenteessa duplikoinnin minimoiminen
+- Autentikointiin perehtyminen ja käyttöönotto
+- Valmentajanäkymän siirtäminen Reactiin
+- Tallentamisten jälkeiset komponenttien väliset uudelleenohjaukset - suunnittelu ja parantaminen
+- Session harjoitteiden kommentoinnin bugin korjaaminen - nyt kommenteilla yksi useState
+- Tulevien treenien päivämäärä näkyy nullina
+- Tulevien treenien listaus päivämäärän mukaan
+- Asiakkaalle näkymä, jossa voi tarkastella ja muokata yksittäisen session kommentteja ja palauttaa session statukselle "upcoming"
+- Virheidenkäsittelyn kehittäminen
+- Valmentajalle lisää toimintoja: asiakkaiden treenien seurannan näkymän laajentaminen, kokonaisten treeniohjelmien luominen, asiakkaiden lisääminen
