@@ -1,9 +1,6 @@
-import { Button, Surface, Text, TextInput } from "react-native-paper";
-import { styles } from "../ui/styles";
 import { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import { colors } from "../ui/colors";
-import { SessionExercise, TrainingSession } from "../types/Exercise";
 import NewExercise from "../components/NewExcercise";
 import NewSession from "../components/NewSession";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -24,4 +21,5 @@ export default function AddSessionScreen() {
       </ScrollView>
     </SafeAreaView>
   );
+  //täältä puuttuu koko näkymän tyhjentäminen + toiseen näkymään ohjaaminen tallentamisen jälkeen
 }
