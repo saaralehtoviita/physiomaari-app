@@ -12,9 +12,14 @@ export default function SessionsUpcomingScreen() {
   const { sessions } = useSessions();
   const { activeUser } = useUsers();
 
-  const sessionsUpcoming: TrainingSession[] = sessions.filter(
-    (s) => s.status === "upcoming" && s.userId === activeUser?.id && !!s.title,
-  );
+  const sessionsUpcoming: TrainingSession[] = sessions
+    .filter(
+      (s) =>
+        s.status === "upcoming" && s.userId === activeUser?.id && !!s.title,
+    )
+    .sort((a, b) => {
+      return a.datePlanned.getTime() - b.datePlanned.getTime();
+    });
 
   console.log("All sessions: ", sessionsUpcoming);
   console.log("Active user: ", activeUser);
