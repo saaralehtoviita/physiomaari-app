@@ -1,4 +1,10 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { UserComment } from "../types/Exercise";
 import { db } from "./config";
 
@@ -21,12 +27,20 @@ export async function addComment(
       ),
       {
         comment: comment.comment,
-        userId: comment.id,
+        userId: comment.userId,
         exerciseId: comment.exerciseId,
         commentWritten: serverTimestamp(),
       },
     );
-    console.log("Document written with ID: ", commentRef.id);
+
+    const exerciseRef = doc(db, "sessions", sessionId, "exercises", exerciseId);
+
+    //päivitetään harjoituksen status kommentin tallentamisen jälkeen
+    await updateDoc(exerciseRef, {
+      status: "completed",
+    });
+
+    console.log("Comment added + exercise completed");
     return commentRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
