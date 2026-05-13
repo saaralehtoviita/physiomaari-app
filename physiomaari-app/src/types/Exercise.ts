@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export type SessionStatus = "completed" | "upcoming";
 export type ExerciseStatus = "completed" | "upcoming";
 
@@ -7,7 +9,7 @@ export type TrainingSession = {
   title: string;
   description: string;
   datePlanned: Date;
-  dateCompleted?: Date; //ei pakollinen, koska aluksi null
+  dateCompleted?: Timestamp; //ei pakollinen, koska aluksi null
   status: SessionStatus;
   exercises?: SessionExercise[];
 };
