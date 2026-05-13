@@ -19,6 +19,7 @@ type Nav = NativeStackNavigationProp<RootStackParamList>;
 //tässä bugi: vain yksi useState kommentille - kun kirjoittaa kommenttia, kaikkien harjoitteiden kommenttikentät päivittyvät
 //--> tallennus kuitenkin taitaa onnistua
 export default function SessionView() {
+  //sessionViewn ja Sessionin välinen navigaatio rakennettu tekoälyn avustuksella
   const navigation = useNavigation<Nav>();
   const route = useRoute();
   const { sessionId } = route.params as {
@@ -39,18 +40,27 @@ export default function SessionView() {
     load();
   }, [sessionId]);
 
+  //kommenttilista
+  const [comments, setComments] = useState<{ [exerciseId: string]: string }>(
+    {},
+  );
+
   const [comment, setComment] = useState<string>("");
+
   const [message, setMessage] = useState<string>("");
 
   async function createCommentAndSave(exerciseId: string) {
     if (!sessionId || !session?.userId) {
       console.log("Cant add comment without session or userId");
     }
-    const commentToSave = comment.trim();
+    //haetaan listasta oikean harjoitteen kommenti
+    const commentToSave = (comments[exerciseId] || "").trim();
 
     if (commentToSave.length === 0) {
       setMessage("Please write a comment");
+      return;
     }
+
     const newComment: UserComment = {
       id: "", //firebase generoi
       comment: commentToSave,
@@ -58,10 +68,13 @@ export default function SessionView() {
       exerciseId: exerciseId,
     };
 
-    addComment(sessionId, exerciseId, newComment);
+    await addComment(sessionId, exerciseId, newComment);
 
     //kommenttikentän tyhjennys
-    setComment("");
+    setComments((prev) => ({
+      ...prev,
+      [exerciseId]: "",
+    }));
 
     //tänne metodi oikean harjoitteen etsimiseen ja merkitsemiseen tehdyksi
     //(metodi puuttuu backendista)
@@ -93,7 +106,7 @@ export default function SessionView() {
           </Text>
           <Text style={styles.smallTitle}>
             <MaterialCommunityIcons name="calendar" size={20} />
-            {session?.datePlanned.toString()}
+            {session?.datePlanned.toString().substring(0, 10)}
           </Text>
           <Text style={styles.description}>
             <MaterialCommunityIcons name="text" size={18} />
@@ -107,9 +120,14 @@ export default function SessionView() {
                 mode="outlined"
                 style={{ width: "100%" }}
                 label="Comment"
-                value={comment}
+                value={comments[e.id] || ""}
                 placeholder="...write comment"
-                onChangeText={setComment}
+                onChangeText={(text) =>
+                  setComments((prev) => ({
+                    ...prev,
+                    [e.id]: text,
+                  }))
+                }
                 multiline
                 numberOfLines={6}
               />

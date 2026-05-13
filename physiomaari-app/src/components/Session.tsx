@@ -31,7 +31,10 @@ export default function Session({ session }: Props) {
   }
 
   //useiden sessioiden päivämäärät näkyvät nullina
-  const title = session.datePlanned + " " + session.title.toUpperCase();
+  const title =
+    session.datePlanned.toString().substring(0, 10) +
+    " " +
+    session.title.toUpperCase();
 
   return (
     <List.Section style={{ marginBottom: 5 }}>
